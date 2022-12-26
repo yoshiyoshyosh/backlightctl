@@ -23,7 +23,10 @@ If -s and -c are specified, -c takes priority
 /usr/local/bin/backlightctl -s <your_preferred_brightness>
 ```
 - (doas) add the following to `/etc/doas.conf`:
-  - I don't know the equivalent sudo rule for this
 ```
 permit nopass :wheel as root cmd backlightctl
+```
+- (sudo) add the following to `/etc/sudoers` (using `visudo`):
+```
+%wheel ALL=(ALL:ALL) NOPASSWD: /usr/local/bin/backlightctl
 ```
