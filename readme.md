@@ -6,7 +6,7 @@ The only configurable variable is the backlight path. It defaults to `/sys/class
 
 ## Usage
 ```
-Usage: backlightctl [-h] [-s VALUE] [-c VALUE]
+Usage: backlightctl [-hq] [-s VALUE] [-c VALUE]
 No arguments: Print current brightness and exit
 If -s and -c are specified, -c takes priority
 
