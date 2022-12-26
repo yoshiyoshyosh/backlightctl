@@ -1,0 +1,42 @@
+#!/bin/sh
+set -euf
+
+BACKLIGHT_PATH="${BACKLIGHT_PATH:-/sys/class/backlight/amdgpu_bl0/brightness}"
+
+errecho() {
+	>&2 printf '%s\n' "$*"
+}
+
+usage() {
+	errecho "\
+Usage: ${0##*/} [-hq] [-s VALUE] [-c VALUE]
+No arguments: Print current brightness and exit
+If -s and -c are specified, -c takes priority
+
+ -h         show this help
+ -q         print current brightness to stdout and exit
+ -s <VALUE> set brightness to VALUE
+ -c <VALUE> change brightness by VALUE"
+ 	exit 0
+}
+
+q=
+nb=
+cb="$(cat "$BACKLIGHT_PATH")"
+while getopts :hqs:c: OPT; do
+	case $OPT in
+		h) usage ;;
+		q) q=1 ;;
+		s) nb=$OPTARG ;;
+		c) nb=$((cb + OPTARG)) ;;
+		*) exit 1 ;;
+	esac
+done
+[ $q ] && echo "$cb" && exit 0
+errecho "Current brightness: $cb"
+
+[ -z "$nb" ] && errecho "Brightness not changed" && exit 0
+[ "$nb" -gt 255 ] && nb=255
+[ "$nb" -lt 0 ] && nb=0
+
+printf '%s' "$nb" > "$BACKLIGHT_PATH" && errecho "New brightness: $nb" || errecho "Error setting brightness!"
