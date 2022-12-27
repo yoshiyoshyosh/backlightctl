@@ -2,7 +2,7 @@
 A simple script to change the backlight brightness value on laptops. Mostly made as a workaround for [this bug](https://bugzilla.kernel.org/show_bug.cgi?id=203905).
 
 ## Configuration
-The only configurable variable is the backlight path. It defaults to `/sys/class/backlight/amdgpu_bl0/brightness`. You can change `BACKLIGHT_PATH` to point to the file path.
+The only configurable variable is the backlight path. It defaults to `/sys/class/backlight/amdgpu_bl0`. You can change `BACKLIGHT_PATH` to point to the file path.
 
 ## Usage
 ```
