@@ -37,7 +37,7 @@ done
 errecho "Current brightness: $cb"
 
 [ -z "$nb" ] && errecho "Brightness not changed" && exit 0
-[ "$nb" -gt "$mb" ] && nb=255
+[ "$nb" -gt "$mb" ] && nb=$mb
 [ "$nb" -lt 0 ] && nb=0
 
 printf '%s' "$nb" > "$BACKLIGHT_PATH/brightness" && errecho "New brightness: $nb" || errecho "Error setting brightness!"
