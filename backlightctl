@@ -20,20 +20,18 @@ If -s and -c are specified, -c takes priority
  	exit 0
 }
 
-q=
 nb=
 mb="$(cat "$BACKLIGHT_PATH/max_brightness")"
 cb="$(cat "$BACKLIGHT_PATH/brightness")"
 while getopts :hqs:c: OPT; do
 	case $OPT in
 		h) usage ;;
-		q) q=1 ;;
+		q) echo "$cb" && exit 0 ;;
 		s) nb=$OPTARG ;;
 		c) nb=$((cb + OPTARG)) ;;
 		*) exit 1 ;;
 	esac
 done
-[ $q ] && echo "$cb" && exit 0
 errecho "Current brightness: $cb"
 
 [ -z "$nb" ] && errecho "Brightness not changed" && exit 0
