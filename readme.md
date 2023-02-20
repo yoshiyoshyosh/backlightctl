@@ -17,6 +17,7 @@ If -s and -c are specified, -c takes priority
 ```
 
 ## Recommendations
+- `chown root:root` the file
 - Move this script to `/usr/local/bin`
 - If your backlight isn't saved on reboot, add the following to `/etc/rc.local`:
 ```
